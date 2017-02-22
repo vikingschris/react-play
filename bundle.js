@@ -91,9 +91,17 @@
 
 	var _footer2 = _interopRequireDefault(_footer);
 
-	var _main = __webpack_require__(181);
+	var _SportAction = __webpack_require__(181);
 
-	var _main2 = _interopRequireDefault(_main);
+	var _SportAction2 = _interopRequireDefault(_SportAction);
+
+	var _SportStore = __webpack_require__(185);
+
+	var _SportStore2 = _interopRequireDefault(_SportStore);
+
+	var _Sport = __webpack_require__(187);
+
+	var _Sport2 = _interopRequireDefault(_Sport);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -111,18 +119,47 @@
 	    function Layout() {
 	        _classCallCheck(this, Layout);
 
-	        return _possibleConstructorReturn(this, (Layout.__proto__ || Object.getPrototypeOf(Layout)).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, (Layout.__proto__ || Object.getPrototypeOf(Layout)).call(this));
+
+	        _this.model = new _Sport2.default();
+	        _this.sportAction = new _SportAction2.default();
+	        return _this;
 	    }
 
 	    _createClass(Layout, [{
+	        key: "createSport",
+	        value: function createSport(event) {
+	            if (event.keyCode == 13) {
+	                this.sportAction.createSport(event.target.value);
+	            }
+	        }
+	    }, {
 	        key: "render",
 	        value: function render() {
 	            return _react2.default.createElement(
 	                "div",
 	                null,
-	                _react2.default.createElement(_header2.default, null),
-	                _react2.default.createElement(_main2.default, null),
-	                _react2.default.createElement(_footer2.default, null)
+	                _react2.default.createElement("input", { type: "text", onKeyDown: this.createSport.bind(this) }),
+	                _react2.default.createElement(
+	                    "div",
+	                    null,
+	                    _react2.default.createElement(
+	                        "button",
+	                        { onClick: this.sportAction.getSport.bind(this) },
+	                        "Get"
+	                    ),
+	                    _react2.default.createElement(
+	                        "button",
+	                        { onClick: this.sportAction.testSport.bind(this) },
+	                        "Test"
+	                    ),
+	                    _react2.default.createElement(
+	                        "button",
+	                        { onClick: this.sportAction.testStore.bind(this) },
+	                        "Sport Store"
+	                    )
+	                ),
+	                _react2.default.createElement(_Sport2.default, null)
 	            );
 	        }
 	    }]);
@@ -21669,19 +21706,380 @@
 	    value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Created by andrew25ism on 1/21/2017.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
+
+
+	var _SportDispatcher = __webpack_require__(182);
+
+	var _SportDispatcher2 = _interopRequireDefault(_SportDispatcher);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	/*
+	export function createSport(text){
+	    Dispatcher.dispatch({
+	        type: "CREATE SPORT",
+	        text
+	    });
+	}
+
+	export function deleteSport(){
+	    Dispatcher.dispatch({
+	        type: "DELETE SPORT"
+	    });
+	}
+
+	export function getSport() {
+	    Dispatcher.dispatch({
+	        type: "GET SPORT"
+	    });
+	}
+
+	export function testSport(){
+	    Dispatcher.dispatch({
+	        type: "TEST SPORT"
+	    });
+	}*/
+	var SportAction = function () {
+	    function SportAction() {
+	        _classCallCheck(this, SportAction);
+	    }
+
+	    _createClass(SportAction, [{
+	        key: "createSport",
+	        value: function createSport(team) {
+	            _SportDispatcher2.default.dispatch({
+	                type: "CREATE SPORT",
+	                team: team
+	            });
+	        }
+	    }, {
+	        key: "testSport",
+	        value: function testSport() {
+	            _SportDispatcher2.default.dispatch({
+	                type: "TEST SPORT"
+	            });
+	        }
+	    }, {
+	        key: "testStore",
+	        value: function testStore() {
+	            _SportDispatcher2.default.dispatch({
+	                type: "TEST SPORT STORE"
+	            });
+	        }
+	    }, {
+	        key: "getSport",
+	        value: function getSport() {
+	            _SportDispatcher2.default.dispatch({
+	                type: "GET SPORT",
+	                vorname: "john"
+	            });
+	        }
+	    }]);
+
+	    return SportAction;
+	}();
+
+	exports.default = SportAction;
+
+/***/ },
+/* 182 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _flux = __webpack_require__(183);
+
+	exports.default = new _flux.Dispatcher(); /**
+	                                           * Created by andrew25ism on 1/21/2017.
+	                                           */
+
+/***/ },
+/* 183 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2014-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 */
+
+	module.exports.Dispatcher = __webpack_require__(184);
+
+
+/***/ },
+/* 184 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright (c) 2014-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule Dispatcher
+	 * 
+	 * @preventMunge
+	 */
+
+	'use strict';
+
+	exports.__esModule = true;
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	var invariant = __webpack_require__(9);
+
+	var _prefix = 'ID_';
+
+	/**
+	 * Dispatcher is used to broadcast payloads to registered callbacks. This is
+	 * different from generic pub-sub systems in two ways:
+	 *
+	 *   1) Callbacks are not subscribed to particular events. Every payload is
+	 *      dispatched to every registered callback.
+	 *   2) Callbacks can be deferred in whole or part until other callbacks have
+	 *      been executed.
+	 *
+	 * For example, consider this hypothetical flight destination form, which
+	 * selects a default city when a country is selected:
+	 *
+	 *   var flightDispatcher = new Dispatcher();
+	 *
+	 *   // Keeps track of which country is selected
+	 *   var CountryStore = {country: null};
+	 *
+	 *   // Keeps track of which city is selected
+	 *   var CityStore = {city: null};
+	 *
+	 *   // Keeps track of the base flight price of the selected city
+	 *   var FlightPriceStore = {price: null}
+	 *
+	 * When a user changes the selected city, we dispatch the payload:
+	 *
+	 *   flightDispatcher.dispatch({
+	 *     actionType: 'city-update',
+	 *     selectedCity: 'paris'
+	 *   });
+	 *
+	 * This payload is digested by `CityStore`:
+	 *
+	 *   flightDispatcher.register(function(payload) {
+	 *     if (payload.actionType === 'city-update') {
+	 *       CityStore.city = payload.selectedCity;
+	 *     }
+	 *   });
+	 *
+	 * When the user selects a country, we dispatch the payload:
+	 *
+	 *   flightDispatcher.dispatch({
+	 *     actionType: 'country-update',
+	 *     selectedCountry: 'australia'
+	 *   });
+	 *
+	 * This payload is digested by both stores:
+	 *
+	 *   CountryStore.dispatchToken = flightDispatcher.register(function(payload) {
+	 *     if (payload.actionType === 'country-update') {
+	 *       CountryStore.country = payload.selectedCountry;
+	 *     }
+	 *   });
+	 *
+	 * When the callback to update `CountryStore` is registered, we save a reference
+	 * to the returned token. Using this token with `waitFor()`, we can guarantee
+	 * that `CountryStore` is updated before the callback that updates `CityStore`
+	 * needs to query its data.
+	 *
+	 *   CityStore.dispatchToken = flightDispatcher.register(function(payload) {
+	 *     if (payload.actionType === 'country-update') {
+	 *       // `CountryStore.country` may not be updated.
+	 *       flightDispatcher.waitFor([CountryStore.dispatchToken]);
+	 *       // `CountryStore.country` is now guaranteed to be updated.
+	 *
+	 *       // Select the default city for the new country
+	 *       CityStore.city = getDefaultCityForCountry(CountryStore.country);
+	 *     }
+	 *   });
+	 *
+	 * The usage of `waitFor()` can be chained, for example:
+	 *
+	 *   FlightPriceStore.dispatchToken =
+	 *     flightDispatcher.register(function(payload) {
+	 *       switch (payload.actionType) {
+	 *         case 'country-update':
+	 *         case 'city-update':
+	 *           flightDispatcher.waitFor([CityStore.dispatchToken]);
+	 *           FlightPriceStore.price =
+	 *             getFlightPriceStore(CountryStore.country, CityStore.city);
+	 *           break;
+	 *     }
+	 *   });
+	 *
+	 * The `country-update` payload will be guaranteed to invoke the stores'
+	 * registered callbacks in order: `CountryStore`, `CityStore`, then
+	 * `FlightPriceStore`.
+	 */
+
+	var Dispatcher = (function () {
+	  function Dispatcher() {
+	    _classCallCheck(this, Dispatcher);
+
+	    this._callbacks = {};
+	    this._isDispatching = false;
+	    this._isHandled = {};
+	    this._isPending = {};
+	    this._lastID = 1;
+	  }
+
+	  /**
+	   * Registers a callback to be invoked with every dispatched payload. Returns
+	   * a token that can be used with `waitFor()`.
+	   */
+
+	  Dispatcher.prototype.register = function register(callback) {
+	    var id = _prefix + this._lastID++;
+	    this._callbacks[id] = callback;
+	    return id;
+	  };
+
+	  /**
+	   * Removes a callback based on its token.
+	   */
+
+	  Dispatcher.prototype.unregister = function unregister(id) {
+	    !this._callbacks[id] ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatcher.unregister(...): `%s` does not map to a registered callback.', id) : invariant(false) : undefined;
+	    delete this._callbacks[id];
+	  };
+
+	  /**
+	   * Waits for the callbacks specified to be invoked before continuing execution
+	   * of the current callback. This method should only be used by a callback in
+	   * response to a dispatched payload.
+	   */
+
+	  Dispatcher.prototype.waitFor = function waitFor(ids) {
+	    !this._isDispatching ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatcher.waitFor(...): Must be invoked while dispatching.') : invariant(false) : undefined;
+	    for (var ii = 0; ii < ids.length; ii++) {
+	      var id = ids[ii];
+	      if (this._isPending[id]) {
+	        !this._isHandled[id] ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatcher.waitFor(...): Circular dependency detected while ' + 'waiting for `%s`.', id) : invariant(false) : undefined;
+	        continue;
+	      }
+	      !this._callbacks[id] ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatcher.waitFor(...): `%s` does not map to a registered callback.', id) : invariant(false) : undefined;
+	      this._invokeCallback(id);
+	    }
+	  };
+
+	  /**
+	   * Dispatches a payload to all registered callbacks.
+	   */
+
+	  Dispatcher.prototype.dispatch = function dispatch(payload) {
+	    !!this._isDispatching ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatch.dispatch(...): Cannot dispatch in the middle of a dispatch.') : invariant(false) : undefined;
+	    this._startDispatching(payload);
+	    try {
+	      for (var id in this._callbacks) {
+	        if (this._isPending[id]) {
+	          continue;
+	        }
+	        this._invokeCallback(id);
+	      }
+	    } finally {
+	      this._stopDispatching();
+	    }
+	  };
+
+	  /**
+	   * Is this Dispatcher currently dispatching.
+	   */
+
+	  Dispatcher.prototype.isDispatching = function isDispatching() {
+	    return this._isDispatching;
+	  };
+
+	  /**
+	   * Call the callback stored with the given id. Also do some internal
+	   * bookkeeping.
+	   *
+	   * @internal
+	   */
+
+	  Dispatcher.prototype._invokeCallback = function _invokeCallback(id) {
+	    this._isPending[id] = true;
+	    this._callbacks[id](this._pendingPayload);
+	    this._isHandled[id] = true;
+	  };
+
+	  /**
+	   * Set up bookkeeping needed when dispatching.
+	   *
+	   * @internal
+	   */
+
+	  Dispatcher.prototype._startDispatching = function _startDispatching(payload) {
+	    for (var id in this._callbacks) {
+	      this._isPending[id] = false;
+	      this._isHandled[id] = false;
+	    }
+	    this._pendingPayload = payload;
+	    this._isDispatching = true;
+	  };
+
+	  /**
+	   * Clear bookkeeping used for dispatching.
+	   *
+	   * @internal
+	   */
+
+	  Dispatcher.prototype._stopDispatching = function _stopDispatching() {
+	    delete this._pendingPayload;
+	    this._isDispatching = false;
+	  };
+
+	  return Dispatcher;
+	})();
+
+	module.exports = Dispatcher;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+
+/***/ },
+/* 185 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _events = __webpack_require__(186);
+
+	var _SportDispatcher = __webpack_require__(182);
+
+	var _SportDispatcher2 = _interopRequireDefault(_SportDispatcher);
+
+	var _Sport = __webpack_require__(187);
+
+	var _Sport2 = _interopRequireDefault(_Sport);
 
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(33);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	var _eins = __webpack_require__(182);
-
-	var _eins2 = _interopRequireDefault(_eins);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21690,139 +22088,464 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by andrew25ism on 12/26/2016.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by andrew25ism on 1/21/2017.
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
 
-	var Main = function (_React$Component) {
-	    _inherits(Main, _React$Component);
+	var SportStore = function (_EventEmitter) {
+	    _inherits(SportStore, _EventEmitter);
 
-	    function Main() {
-	        _classCallCheck(this, Main);
+	    function SportStore() {
+	        _classCallCheck(this, SportStore);
 
-	        var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this));
+	        var _this = _possibleConstructorReturn(this, (SportStore.__proto__ || Object.getPrototypeOf(SportStore)).call(this));
+
+	        _this.sports = [];
+	        return _this;
+	    }
+
+	    _createClass(SportStore, [{
+	        key: "createSport",
+	        value: function createSport(team) {
+	            this.sports.push({
+	                id: Date.now(),
+	                team: team
+	            });
+	            this.emit('change');
+	        }
+	    }, {
+	        key: "getAll",
+	        value: function getAll() {
+	            return this.sports;
+	        }
+	    }, {
+	        key: "checkAction",
+	        value: function checkAction(action) {
+	            switch (action.type) {
+	                case "GET SPORT":
+	                    console.log("i got sport");
+	                    break;
+	                case "TEST SPORT":
+	                    console.log("i test sport");
+	                    break;
+	                case "CREATE SPORT":
+	                    sStore.createSport(action.team);
+	                    break;
+	            }
+	        }
+	    }]);
+
+	    return SportStore;
+	}(_events.EventEmitter);
+
+	var sStore = new SportStore();
+	_SportDispatcher2.default.register(sStore.checkAction.bind(undefined));
+	exports.default = sStore;
+
+	/*
+	view is rerendered when the store has changed or something has changed
+
+
+	after store update themselves in response to an action, they emit a change event
+	special views called controller-views, listen for change events, retrieve the data from the stores and
+	provide the new data to the entire tree of their child views
+	 */
+
+/***/ },
+/* 186 */
+/***/ function(module, exports) {
+
+	// Copyright Joyent, Inc. and other Node contributors.
+	//
+	// Permission is hereby granted, free of charge, to any person obtaining a
+	// copy of this software and associated documentation files (the
+	// "Software"), to deal in the Software without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Software, and to permit
+	// persons to whom the Software is furnished to do so, subject to the
+	// following conditions:
+	//
+	// The above copyright notice and this permission notice shall be included
+	// in all copies or substantial portions of the Software.
+	//
+	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+	// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+	function EventEmitter() {
+	  this._events = this._events || {};
+	  this._maxListeners = this._maxListeners || undefined;
+	}
+	module.exports = EventEmitter;
+
+	// Backwards-compat with node 0.10.x
+	EventEmitter.EventEmitter = EventEmitter;
+
+	EventEmitter.prototype._events = undefined;
+	EventEmitter.prototype._maxListeners = undefined;
+
+	// By default EventEmitters will print a warning if more than 10 listeners are
+	// added to it. This is a useful default which helps finding memory leaks.
+	EventEmitter.defaultMaxListeners = 10;
+
+	// Obviously not all Emitters should be limited to 10. This function allows
+	// that to be increased. Set to zero for unlimited.
+	EventEmitter.prototype.setMaxListeners = function(n) {
+	  if (!isNumber(n) || n < 0 || isNaN(n))
+	    throw TypeError('n must be a positive number');
+	  this._maxListeners = n;
+	  return this;
+	};
+
+	EventEmitter.prototype.emit = function(type) {
+	  var er, handler, len, args, i, listeners;
+
+	  if (!this._events)
+	    this._events = {};
+
+	  // If there is no 'error' event listener then throw.
+	  if (type === 'error') {
+	    if (!this._events.error ||
+	        (isObject(this._events.error) && !this._events.error.length)) {
+	      er = arguments[1];
+	      if (er instanceof Error) {
+	        throw er; // Unhandled 'error' event
+	      } else {
+	        // At least give some kind of context to the user
+	        var err = new Error('Uncaught, unspecified "error" event. (' + er + ')');
+	        err.context = er;
+	        throw err;
+	      }
+	    }
+	  }
+
+	  handler = this._events[type];
+
+	  if (isUndefined(handler))
+	    return false;
+
+	  if (isFunction(handler)) {
+	    switch (arguments.length) {
+	      // fast cases
+	      case 1:
+	        handler.call(this);
+	        break;
+	      case 2:
+	        handler.call(this, arguments[1]);
+	        break;
+	      case 3:
+	        handler.call(this, arguments[1], arguments[2]);
+	        break;
+	      // slower
+	      default:
+	        args = Array.prototype.slice.call(arguments, 1);
+	        handler.apply(this, args);
+	    }
+	  } else if (isObject(handler)) {
+	    args = Array.prototype.slice.call(arguments, 1);
+	    listeners = handler.slice();
+	    len = listeners.length;
+	    for (i = 0; i < len; i++)
+	      listeners[i].apply(this, args);
+	  }
+
+	  return true;
+	};
+
+	EventEmitter.prototype.addListener = function(type, listener) {
+	  var m;
+
+	  if (!isFunction(listener))
+	    throw TypeError('listener must be a function');
+
+	  if (!this._events)
+	    this._events = {};
+
+	  // To avoid recursion in the case that type === "newListener"! Before
+	  // adding it to the listeners, first emit "newListener".
+	  if (this._events.newListener)
+	    this.emit('newListener', type,
+	              isFunction(listener.listener) ?
+	              listener.listener : listener);
+
+	  if (!this._events[type])
+	    // Optimize the case of one listener. Don't need the extra array object.
+	    this._events[type] = listener;
+	  else if (isObject(this._events[type]))
+	    // If we've already got an array, just append.
+	    this._events[type].push(listener);
+	  else
+	    // Adding the second element, need to change to array.
+	    this._events[type] = [this._events[type], listener];
+
+	  // Check for listener leak
+	  if (isObject(this._events[type]) && !this._events[type].warned) {
+	    if (!isUndefined(this._maxListeners)) {
+	      m = this._maxListeners;
+	    } else {
+	      m = EventEmitter.defaultMaxListeners;
+	    }
+
+	    if (m && m > 0 && this._events[type].length > m) {
+	      this._events[type].warned = true;
+	      console.error('(node) warning: possible EventEmitter memory ' +
+	                    'leak detected. %d listeners added. ' +
+	                    'Use emitter.setMaxListeners() to increase limit.',
+	                    this._events[type].length);
+	      if (typeof console.trace === 'function') {
+	        // not supported in IE 10
+	        console.trace();
+	      }
+	    }
+	  }
+
+	  return this;
+	};
+
+	EventEmitter.prototype.on = EventEmitter.prototype.addListener;
+
+	EventEmitter.prototype.once = function(type, listener) {
+	  if (!isFunction(listener))
+	    throw TypeError('listener must be a function');
+
+	  var fired = false;
+
+	  function g() {
+	    this.removeListener(type, g);
+
+	    if (!fired) {
+	      fired = true;
+	      listener.apply(this, arguments);
+	    }
+	  }
+
+	  g.listener = listener;
+	  this.on(type, g);
+
+	  return this;
+	};
+
+	// emits a 'removeListener' event iff the listener was removed
+	EventEmitter.prototype.removeListener = function(type, listener) {
+	  var list, position, length, i;
+
+	  if (!isFunction(listener))
+	    throw TypeError('listener must be a function');
+
+	  if (!this._events || !this._events[type])
+	    return this;
+
+	  list = this._events[type];
+	  length = list.length;
+	  position = -1;
+
+	  if (list === listener ||
+	      (isFunction(list.listener) && list.listener === listener)) {
+	    delete this._events[type];
+	    if (this._events.removeListener)
+	      this.emit('removeListener', type, listener);
+
+	  } else if (isObject(list)) {
+	    for (i = length; i-- > 0;) {
+	      if (list[i] === listener ||
+	          (list[i].listener && list[i].listener === listener)) {
+	        position = i;
+	        break;
+	      }
+	    }
+
+	    if (position < 0)
+	      return this;
+
+	    if (list.length === 1) {
+	      list.length = 0;
+	      delete this._events[type];
+	    } else {
+	      list.splice(position, 1);
+	    }
+
+	    if (this._events.removeListener)
+	      this.emit('removeListener', type, listener);
+	  }
+
+	  return this;
+	};
+
+	EventEmitter.prototype.removeAllListeners = function(type) {
+	  var key, listeners;
+
+	  if (!this._events)
+	    return this;
+
+	  // not listening for removeListener, no need to emit
+	  if (!this._events.removeListener) {
+	    if (arguments.length === 0)
+	      this._events = {};
+	    else if (this._events[type])
+	      delete this._events[type];
+	    return this;
+	  }
+
+	  // emit removeListener for all listeners on all events
+	  if (arguments.length === 0) {
+	    for (key in this._events) {
+	      if (key === 'removeListener') continue;
+	      this.removeAllListeners(key);
+	    }
+	    this.removeAllListeners('removeListener');
+	    this._events = {};
+	    return this;
+	  }
+
+	  listeners = this._events[type];
+
+	  if (isFunction(listeners)) {
+	    this.removeListener(type, listeners);
+	  } else if (listeners) {
+	    // LIFO order
+	    while (listeners.length)
+	      this.removeListener(type, listeners[listeners.length - 1]);
+	  }
+	  delete this._events[type];
+
+	  return this;
+	};
+
+	EventEmitter.prototype.listeners = function(type) {
+	  var ret;
+	  if (!this._events || !this._events[type])
+	    ret = [];
+	  else if (isFunction(this._events[type]))
+	    ret = [this._events[type]];
+	  else
+	    ret = this._events[type].slice();
+	  return ret;
+	};
+
+	EventEmitter.prototype.listenerCount = function(type) {
+	  if (this._events) {
+	    var evlistener = this._events[type];
+
+	    if (isFunction(evlistener))
+	      return 1;
+	    else if (evlistener)
+	      return evlistener.length;
+	  }
+	  return 0;
+	};
+
+	EventEmitter.listenerCount = function(emitter, type) {
+	  return emitter.listenerCount(type);
+	};
+
+	function isFunction(arg) {
+	  return typeof arg === 'function';
+	}
+
+	function isNumber(arg) {
+	  return typeof arg === 'number';
+	}
+
+	function isObject(arg) {
+	  return typeof arg === 'object' && arg !== null;
+	}
+
+	function isUndefined(arg) {
+	  return arg === void 0;
+	}
+
+
+/***/ },
+/* 187 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _events = __webpack_require__(186);
+
+	var _SportStore = __webpack_require__(185);
+
+	var _SportStore2 = _interopRequireDefault(_SportStore);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by andrew25ism on 1/30/2017.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+
+	var Sport = function (_React$Component) {
+	    _inherits(Sport, _React$Component);
+
+	    function Sport() {
+	        _classCallCheck(this, Sport);
+
+	        var _this = _possibleConstructorReturn(this, (Sport.__proto__ || Object.getPrototypeOf(Sport)).call(this));
 
 	        _this.state = {
-	            ppl: [{
-	                name: "John",
-	                color: "Red"
-	            }, {
-	                name: "Jane",
-	                color: "Green"
-	            }]
+	            sports: _SportStore2.default.getAll()
 	        };
 	        return _this;
 	    }
 
-	    _createClass(Main, [{
-	        key: "getAll",
-	        value: function getAll() {
-	            return this.state.ppl;
-	        }
-	    }, {
-	        key: "addPerson",
-	        value: function addPerson() {
-	            this.state.ppl.push({
-	                name: "Sally",
-	                color: "Blue"
+	    _createClass(Sport, [{
+	        key: "componentWillMount",
+	        value: function componentWillMount() {
+	            var self = this;
+	            _SportStore2.default.on("change", function () {
+	                self.setState(_SportStore2.default.getAll());
 	            });
-	            this.setState(this.state);
-	        }
-	    }, {
-	        key: "clear",
-	        value: function clear(x, y) {
-	            x.value = "";
-	            y.value = "";
-	        }
-	    }, {
-	        key: "inputPerson",
-	        value: function inputPerson() {
-	            var vorname = document.getElementById("vorname");
-	            var fabre = document.getElementById("fabre");
-	            var btn = document.getElementById("btn");
-	            var obj = {};
-	            this.state.ppl.push({
-	                name: vorname.value,
-	                color: fabre.value
-	            });
-	            this.setState(this.state);
-	            this.clear(vorname, fabre);
-	        }
+	        } /*
+	          componentWillUnmount(){
+	             var self = this;
+	             SportStore.removeListener("change", function () {
+	                 self.setState(SportStore.getAll());
+	             });
+	          }*/
+
 	    }, {
 	        key: "render",
 	        value: function render() {
 	            return _react2.default.createElement(
 	                "div",
-	                { id: "container" },
+	                null,
 	                _react2.default.createElement(
-	                    "table",
+	                    "ul",
 	                    null,
-	                    _react2.default.createElement(
-	                        "tbody",
-	                        null,
-	                        this.state.ppl.map(function (val) {
-	                            return _react2.default.createElement(
-	                                "tr",
-	                                { key: _eins2.default.nonce(5) },
-	                                _react2.default.createElement(
-	                                    "td",
-	                                    { key: _eins2.default.nonce(4) },
-	                                    val.name
-	                                ),
-	                                _react2.default.createElement(
-	                                    "td",
-	                                    { key: _eins2.default.nonce(4) },
-	                                    val.color
-	                                )
-	                            );
-	                        })
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    "section",
-	                    null,
-	                    _react2.default.createElement(
-	                        "p",
-	                        null,
-	                        _react2.default.createElement("input", { type: "text", placeholder: "name...", id: "vorname" }),
-	                        _react2.default.createElement("input", { type: "text", placeholder: "color...", id: "fabre" })
-	                    ),
-	                    _react2.default.createElement(
-	                        "button",
-	                        { id: "btn", onClick: this.inputPerson.bind(this) },
-	                        "Add Person"
-	                    )
+	                    this.state.sports.map(function (val) {
+	                        return _react2.default.createElement(
+	                            "li",
+	                            { key: val.id },
+	                            val.team
+	                        );
+	                    })
 	                )
 	            );
 	        }
 	    }]);
 
-	    return Main;
+	    return Sport;
 	}(_react2.default.Component);
 
-	exports.default = Main;
-
-/***/ },
-/* 182 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	/**
-	 * Created by andrew25ism on 12/26/2016.
-	 */
-	module.exports = {
-	    nonce: function nonce(range) {
-	        var arr = [];
-
-	        for (var i = 0; i < (range > Number.MAX_SAFE_INTEGER ? Number.MAX_SAFE_INTEGER : range); i++) {
-	            arr.push(String.fromCharCode(Math.floor(Math.random() * 26 + 65)));
-	            arr.push(String.fromCharCode(Math.floor(Math.random() * 12 + 48)));
-	            arr.push(String.fromCharCode(Math.floor(Math.random() * 26 + 97)));
-	        }
-	        return arr.join("");
-	    }
-	};
+	exports.default = Sport;
 
 /***/ }
 /******/ ]);

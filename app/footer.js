@@ -1,6 +1,4 @@
-/**
- * Created by andrew25ism on 12/11/2016.
- */
+
 import React from "react";
 import ReactDOM from "react-dom";
 

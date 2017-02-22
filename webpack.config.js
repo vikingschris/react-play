@@ -1,8 +1,3 @@
-/**
- * Created by andrew25ism on 12/11/2016.
- */
-
-var TestPlugin = require('./my_plugins/tester_quiz');
 
 module.exports = {
     entry: "./index.js",
@@ -13,7 +8,7 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /\.js?$/,
+                test: /\.js$/,
                 exclude: /(node_modules|bower_components)/,
                 //preprocessor
                 //anything that is a jsx file, runs through the loader (babel-loader)
